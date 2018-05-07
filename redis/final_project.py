@@ -1,13 +1,19 @@
 # Put the use case you chose here. Then justify your database choice:
 #Use case:Hackernews
 #
+#The reason I chose Redis for this assignment is its fast in-memory read/write speed and its support for set and sorted set data structures
+#which allows me to keep track of top comments, top articles, newest articles, newest comments etc. Although not all of them are listed here
+#the ability to create all these leaderboard are very important for sites like hackernews as the information (ariclec, comments etc) are always 
+#displayed in a weighted manner and it is important to give the user the ability to sort according to different criteria.
 #
 # Explain what will happen if coffee is spilled on one of the servers in your cluster, causing it to go down.
 # Because Redis uses a master-slave model in case of a node failure a slave node would be promoted to master and the system would be able to continue. 
 #
 # What data is it not ok to lose in your app? What can you do in your commands to mitigate the risk of lost data?
-#
-#
+# User, article and comment are not OKAY to lose as having those three models are enough to reconstruct the other models which are mostly
+# used for scorekeeping. For persistance, I can manually call the BGSAVE method whenever a new user or article or comment is created to 
+# force redis to take a snapshot and save the dataset.
+
 
 import redis
 import time
